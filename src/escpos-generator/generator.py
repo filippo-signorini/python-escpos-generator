@@ -9,8 +9,8 @@ from typing_extensions import assert_never
 
 
 class Generator:
-    def __init__(self, printer: Usb, paper_size: PosPaperSize) -> None:
-        self.p = printer
+    def __init__(self, idVendor: int, idProduct: int, paper_size: PosPaperSize) -> None:
+        self.p = Usb(idVendor, idProduct)
         self.paper_size = paper_size
         self._currentStyle = PosStyle.defaults()
 
