@@ -106,8 +106,8 @@ class Generator:
         self.text("   0 1 2 3 4 5 6 7 8 9 A B C D E F ")
         self.empty_lines()
         for i in range(0, 0x10):
-            self.text(hex(i)[2:].upper())
+            self.text(hex(i)[2:].upper(), lines_after=0)
             for j in range(0, 0x10):
                 digit = max(i * 0x10 + j, 0x20)
-                self.text(chr(digit) + " ")
+                self.text(chr(digit) + " ", lines_after=0)
             self.empty_lines()
