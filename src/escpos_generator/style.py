@@ -91,7 +91,7 @@ class PosStyle:
         self, par: Optional[_T], defaultValue: Optional[_T], allowNull: bool = True
     ) -> Optional[_T]:
         if par != defaultValue:
-            return par or defaultValue
+            return par if par is not None else defaultValue
 
         if allowNull:
             return None

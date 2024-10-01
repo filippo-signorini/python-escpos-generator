@@ -42,6 +42,7 @@ class Generator:
             height=style.height.value if style.height is not None else None,
             width=style.width.value if style.width is not None else None,
             invert=style.inverted,
+            normal_textsize=not style.double_height and not style.double_width,
         )
 
     def text(

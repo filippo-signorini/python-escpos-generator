@@ -1,20 +1,76 @@
+import re
 from dataclasses import dataclass
 from enum import Enum, auto
 
 from escpos.constants import QR_ECLEVEL_H, QR_ECLEVEL_L, QR_ECLEVEL_M, QR_ECLEVEL_Q
+from typing_extensions import deprecated
 
 
-class BarcodeType(Enum):
+class _BarcodeType(Enum):
     CODE39 = auto()
     CODE128 = auto()
 
 
-@dataclass
+class BarcodeCodePage(Enum):
+    a = "{A"
+    b = "{b"
+    c = "{c"
+
+
 class Barcode:
-    type: BarcodeType
-    data: str
-    height: int = 162
-    width: int = 3
+    @deprecated("Use constructor methods like `Barcode.code128`")
+    def __init__(self, data: str, type: _BarcodeType, height: int, width: int):
+        Barcode._check_h_w(height, width)
+        self.data = data
+        self.type = type
+        self.height = height
+        self.width = width
+
+    _default_height = 162
+    _default_width = 3
+
+    @staticmethod
+    def code39(
+        data: str,
+        height: int = _default_height,
+        width: int = _default_width,
+    ) -> "Barcode":
+        Barcode._check_h_w(height, width)
+        if not (1 <= len(data) <= 255):
+            raise ValueError("Barcode: Wrong data range. 1 < k < 255")
+
+        if re.match(r"^[0-9A-Z \$\%\*\+\-\.\/]$", data):
+            raise ValueError("Barcode: Data is not valid")
+
+        return Barcode(
+            data=data,
+            type=_BarcodeType.CODE39,
+            height=height,
+            width=width,
+        )
+
+    @staticmethod
+    def code128(
+        data: str,
+        code_page: BarcodeCodePage = BarcodeCodePage.a,
+        height: int = _default_height,
+        width: int = _default_width,
+    ) -> "Barcode":
+        Barcode._check_h_w(height, width)
+
+        if not (2 <= len(data) <= 255):
+            raise ValueError("Barcode: Wrong data range. 2 < n < 255")
+
+        for char in data:
+            if ord(char) > 127:
+                raise ValueError("Barcode: Data is not valid")
+
+        return Barcode(
+            data=code_page.value + data,
+            type=_BarcodeType.CODE128,
+            height=height,
+            width=width,
+        )
 
     def __post_init__(self):
         Barcode._check_h_w(self.height, self.width)
