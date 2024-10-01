@@ -20,14 +20,14 @@ class PosRotation(Enum):
 
 
 class PosTextSize(Enum):
-    size1 = 0
-    size2 = 1
-    size3 = 2
-    size4 = 3
-    size5 = 4
-    size6 = 5
-    size7 = 6
-    size8 = 7
+    size1 = 1
+    size2 = 2
+    size3 = 3
+    size4 = 4
+    size5 = 5
+    size6 = 6
+    size7 = 7
+    size8 = 8
 
 
 @dataclass
