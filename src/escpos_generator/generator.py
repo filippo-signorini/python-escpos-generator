@@ -95,6 +95,7 @@ class Generator:
             height=barcode.height,
             width=barcode.width,
             align_ct=True,
+            pos="OFF",
         )
 
     def image(self, image: str, align: PosAlign = PosAlign.center) -> None:
