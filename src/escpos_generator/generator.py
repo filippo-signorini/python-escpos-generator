@@ -1,11 +1,17 @@
 from math import floor
 from typing import Optional
 
-from codes import Barcode, QRCode
-from enums import PosPaperSize
 from escpos.printer import Usb
-from style import PosAlign, PosFontType, PosStyle
 from typing_extensions import assert_never
+
+from escpos_generator import (
+    Barcode,
+    PosAlign,
+    PosFontType,
+    PosPaperSize,
+    PosStyle,
+    QRCode,
+)
 
 
 class Generator:
