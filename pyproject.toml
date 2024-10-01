@@ -1,3 +1,14 @@
 [build-system]
 requires = ['setuptools>=42']
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "escpos-generator"
+description = "A wrapper for python-escpos[usb] module."
+version = "0.0.1"
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+]
+dependencies = ["python-escpos[usb] >= 3.1"]
