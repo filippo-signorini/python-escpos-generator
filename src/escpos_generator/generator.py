@@ -111,3 +111,4 @@ class Generator:
                 digit = max(i * 0x10 + j, 0x20)
                 self.text(chr(digit) + " ", lines_after=0)
             self.empty_lines()
+        self.cut()
