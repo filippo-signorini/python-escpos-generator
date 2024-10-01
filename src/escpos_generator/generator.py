@@ -4,14 +4,9 @@ from typing import Optional
 from escpos.printer import Usb
 from typing_extensions import assert_never
 
-from escpos_generator import (
-    Barcode,
-    PosAlign,
-    PosFontType,
-    PosPaperSize,
-    PosStyle,
-    QRCode,
-)
+from .codes import Barcode, QRCode
+from .enums import PosPaperSize
+from .style import PosAlign, PosFontType, PosStyle
 
 
 class Generator:
